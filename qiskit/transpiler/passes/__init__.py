@@ -176,6 +176,7 @@ from .analysis import CountOps
 from .analysis import CountOpsLongestPath
 from .analysis import NumTensorFactors
 from .analysis import DAGLongestPath
+from .analysis import IndepCircuit
 
 # synthesis
 from .synthesis import UnitarySynthesis

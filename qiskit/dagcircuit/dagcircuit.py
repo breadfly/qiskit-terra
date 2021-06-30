@@ -1570,6 +1570,22 @@ class DAGCircuit:
             else:
                 op_dict[name] += 1
         return op_dict
+    
+    def indep_circuit(self):
+        """ Return the list of independent circuits of a DAG circuit.
+        """
+        mask = {}
+        indep_li = []
+        for qubit in self.qubits :
+            comp = []
+            if mask[qubit] == True : continue
+            inp_node = self.input_map[qubit]
+            for node in self.descendants(inp_node) :
+                if node.type == "out":
+                    mask[node.wire] = True
+                    comp.append(node.wire)
+            indep_li.append(comp)
+        return indep_li
 
     def count_ops_longest_path(self):
         """Count the occurrences of operation names on the longest path.
@@ -1597,6 +1613,7 @@ class DAGCircuit:
             "bits": self.num_clbits(),
             "factors": self.num_tensor_factors(),
             "operations": self.count_ops(),
+            "indep_circuits": self.indep_circuit(),
         }
         return summary
 
