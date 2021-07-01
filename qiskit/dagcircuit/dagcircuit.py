@@ -1574,15 +1574,15 @@ class DAGCircuit:
     def indep_circuit(self):
         """ Return the list of independent circuits of a DAG circuit.
         """
-        mask = {}
+        mask = []
         indep_li = []
         for qubit in self.qubits :
             comp = []
-            if mask[qubit] == True : continue
+            if qubit in mask : continue
             inp_node = self.input_map[qubit]
             for node in self.descendants(inp_node) :
                 if node.type == "out":
-                    mask[node.wire] = True
+                    mask.append(node.wire)
                     comp.append(node.wire)
             indep_li.append(comp)
         return indep_li

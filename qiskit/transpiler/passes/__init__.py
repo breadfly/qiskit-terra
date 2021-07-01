@@ -166,6 +166,8 @@ from .optimization import RemoveDiagonalGatesBeforeMeasure
 from .optimization import CrosstalkAdaptiveSchedule
 from .optimization import HoareOptimizer
 from .optimization import TemplateOptimization
+from .optimization import RemoveCXInZeroState
+from .optimization import SwapCancellation
 
 # circuit analysis
 from .analysis import ResourceEstimation
